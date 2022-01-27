@@ -1,0 +1,104 @@
+﻿**********************
+Windows PowerShell transcript start
+Start time: 20220127102737
+Username: DESKTOP-SITPOTH\sysadmin
+RunAs User: DESKTOP-SITPOTH\sysadmin
+Configuration Name: 
+Machine: DESKTOP-SITPOTH (Microsoft Windows NT 10.0.19041.0)
+Host Application: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -Command if((Get-ExecutionPolicy ) -ne 'AllSigned') { Set-ExecutionPolicy -Scope Process Bypass }; & 'C:\Users\sysadmin\Documents\anum_acls.ps1'
+Process ID: 8732
+PSVersion: 5.1.19041.1
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.19041.1
+BuildVersion: 10.0.19041.1
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+**********************
+Command start time: 20220127102737
+**********************
+PS>if((Get-ExecutionPolicy ) -ne 'AllSigned') { Set-ExecutionPolicy -Scope Process Bypass }; & 'C:\Users\sysadmin\Documents\anum_acls.ps1'
+Execution Policy Change
+The execution policy helps protect you from scripts that you do not trust. Changing the execution policy might expose you to the security risks described in the about_Execution_Policies help topic at https:/go.microsoft.com/fwlink/?LinkID=135170. Do you want to change the execution policy?
+&Yes  Yes to &All  &No  No to A&ll  &Suspend
+A
+>> TerminatingError(Set-ExecutionPolicy): "Windows PowerShell updated your execution policy successfully, but the setting is overridden by a policy defined at a more specific scope.  Due to the override, your shell will retain its current effective execution policy of Unrestricted. Type "Get-ExecutionPolicy -List" to view your execution policy settings. For more information please see "Get-Help Set-ExecutionPolicy"."
+**********************
+Windows PowerShell transcript start
+Start time: 20220127102743
+Username: DESKTOP-SITPOTH\sysadmin
+RunAs User: DESKTOP-SITPOTH\sysadmin
+Configuration Name: 
+Machine: DESKTOP-SITPOTH (Microsoft Windows NT 10.0.19041.0)
+Host Application: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -Command if((Get-ExecutionPolicy ) -ne 'AllSigned') { Set-ExecutionPolicy -Scope Process Bypass }; & 'C:\Users\sysadmin\Documents\anum_acls.ps1'
+Process ID: 8732
+PSVersion: 5.1.19041.1
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.19041.1
+BuildVersion: 10.0.19041.1
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+**********************
+Command start time: 20220127102743
+**********************
+PS>CommandInvocation(Out-String): "Out-String"
+>> ParameterBinding(Out-String): name="InputObject"; value="Windows PowerShell updated your execution policy successfully, but the setting is overridden by a policy defined at a more specific scope.  Due to the override, your shell will retain its current effective execution policy of Unrestricted. Type "Get-ExecutionPolicy -List" to view your execution policy settings. For more information please see "Get-Help Set-ExecutionPolicy"."
+Set-ExecutionPolicy : Windows PowerShell updated your execution policy successfully, but the setting is overridden by a 
+policy defined at a more specific scope.  Due to the override, your shell will retain its current effective execution 
+policy of Unrestricted. Type "Get-ExecutionPolicy -List" to view your execution policy settings. For more information 
+please see "Get-Help Set-ExecutionPolicy".
+At line:1 char:46
++ ...  -ne 'AllSigned') { Set-ExecutionPolicy -Scope Process Bypass }; & 'C ...
++                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : PermissionDenied: (:) [Set-ExecutionPolicy], SecurityException
+    + FullyQualifiedErrorId : ExecutionPolicyOverride,Microsoft.PowerShell.Commands.SetExecutionPolicyCommand
+Set-ExecutionPolicy : Windows PowerShell updated your execution policy successfully, but the setting is overridden by a 
+policy defined at a more specific scope.  Due to the override, your shell will retain its current effective execution 
+policy of Unrestricted. Type "Get-ExecutionPolicy -List" to view your execution policy settings. For more information 
+please see "Get-Help Set-ExecutionPolicy".
+At line:1 char:46
++ ...  -ne 'AllSigned') { Set-ExecutionPolicy -Scope Process Bypass }; & 'C ...
++                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : PermissionDenied: (:) [Set-ExecutionPolicy], SecurityException
+    + FullyQualifiedErrorId : ExecutionPolicyOverride,Microsoft.PowerShell.Commands.SetExecutionPolicyCommand
+Set-ExecutionPolicy : Windows PowerShell updated your execution policy successfully, but the setting is overridden by
+a policy defined at a more specific scope.  Due to the override, your shell will retain its current effective
+execution policy of Unrestricted. Type "Get-ExecutionPolicy -List" to view your execution policy settings. For more
+information please see "Get-Help Set-ExecutionPolicy".
+At line:1 char:46
++ ...  -ne 'AllSigned') { Set-ExecutionPolicy -Scope Process Bypass }; & 'C ...
++                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : PermissionDenied: (:) [Set-ExecutionPolicy], SecurityException
+    + FullyQualifiedErrorId : ExecutionPolicyOverride,Microsoft.PowerShell.Commands.SetExecutionPolicyCommand
+
+
+    Directory: C:\Users
+
+
+Path     Owner               Access
+----     -----               ------
+sysadmin NT AUTHORITY\SYSTEM NT AUTHORITY\SYSTEM Allow  FullControl...
+
+
+    Directory: C:\Users\sysadmin\Documents
+
+
+Path          Owner                  Access
+----          -----                  ------
+anum_acls.ps1 BUILTIN\Administrators NT AUTHORITY\SYSTEM Allow  FullControl...
+
+
+**********************
+Command start time: 20220127102744
+**********************
+PS>$global:?
+True
+**********************
+Windows PowerShell transcript end
+End time: 20220127102744
+**********************
