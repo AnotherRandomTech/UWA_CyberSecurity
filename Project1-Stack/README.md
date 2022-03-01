@@ -21,7 +21,7 @@ The following design below is a representation of an Azure Cloud setup of the El
 
 In this design, all traffic was restricted to each of our personal IPv4 public IP addresses.
 
-![Network Design](images/Microsoft_Azure_Network_Design_1.jpg)
+![Network Design](images/Microsoft_Azure_Network_Design_1.png)
 
 ### Resources
 
