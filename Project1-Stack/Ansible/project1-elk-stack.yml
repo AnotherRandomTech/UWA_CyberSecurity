@@ -1,0 +1,56 @@
+---
+  - name: Project 1 - Elk Stack Setup
+    hosts: elk
+    become: true
+    tasks:
+
+    - name: Install docker.io  (state=present is optional)
+      apt:
+        update_cache: yes
+        pkg:
+          - docker.io
+        state: latest
+
+    - name: Install python3-pip
+      apt:
+        update_cache: yes
+        pkg:
+          - python3-pip
+        state: latest
+
+    - name: Install pip module docker
+      pip:
+        name: docker
+        state: present
+
+    # Use command module - change sysctl values to handle more files
+    - name: Increase virtual memory
+      command: sysctl -w vm.max_map_count=262144
+
+    # validate sysctl changes
+    - name: sysctl validate changes
+      sysctl:
+         name: vm.max_map_count
+         value: 262144
+         state: present
+         reload: yes
+
+    # docker service enable using systemd
+    #- name: Enable service docker and ensure it is not masked
+    #  ansible.builtin.systemd:
+    #    name: docker
+    #    enabled: yes
+    #    masked: no
+
+    - name: Create docker container for elk
+      community.docker.docker_container:
+        name: elk_stack
+        image: "sebp/elk:761"
+        restart: yes
+        state: started
+        restart_policy: always
+        ports:
+        # Publish container ports for elk
+        - "5601:5601"
+        - "9200:9200"
+        - "5044:5044"
