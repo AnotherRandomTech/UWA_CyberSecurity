@@ -1,0 +1,40 @@
+---
+  - name: Week 12 - Activity 1
+    hosts: webservers
+    become: true
+    tasks:
+
+    - name: Install docker.io  (state=present is optional)
+      apt:
+        name: docker.io
+        state: present
+
+    - name: Install python3-pip
+      apt:
+        name: python3-pip
+        state: present
+
+    - name: Install pip module docker
+      pip:
+        name: docker
+
+    - name: Create docker container for dvwa
+      community.docker.docker_container:
+        name: dvwa_web
+        image: "cyberxsecurity/dvwa"
+        restart: yes
+        state: started
+        restart_policy: always
+        ports:
+        # Publish container port 9000 as host port 8080
+        - "80:80"
+
+    - name: Enable service docker and ensure it is not masked
+      ansible.builtin.systemd:
+        name: docker
+        enabled: yes
+        masked: no
+
+    - name: checks if dvwa is running by using curl on the setup php file
+      ansible.builtin.shell:
+        cmd: curl localhost/setup.php

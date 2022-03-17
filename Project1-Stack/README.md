@@ -16,6 +16,8 @@ This project also contains the following details:
   - FileBeat Setup
 - Use of Ansible for Automated Deployment.
 
+Integrating an ELK server allows users to easily monitor the vulnerable VMs for changes to the _____ and system _____.
+
 ### Network Design
 The following design below is a representation of an Azure Cloud setup of the Elk stack, including the setup of a Load Balancer and use of network security groups to limit the flow of traffic using rule based control.
 
@@ -80,8 +82,53 @@ The below rules are allowed internal traffic.
 | Jump Host |                                | SSH           |
 
 
+### Docker Containers
+
+The following screenshot displays the result of running `docker ps` after successfully configuring the ELK instance.
+
+#### Host: Webservers
+
+```
+root@45f0b8ecdbe1:~# ansible webservers -a "sudo docker ps"
+10.0.0.5 | CHANGED | rc=0 >>
+CONTAINER ID   IMAGE                 COMMAND      CREATED       STATUS          PORTS                NAMES
+17bc61aba01a   cyberxsecurity/dvwa   "/main.sh"   3 weeks ago   Up 25 minutes   0.0.0.0:80->80/tcp   dvwa_web
+10.0.0.6 | CHANGED | rc=0 >>
+CONTAINER ID   IMAGE                 COMMAND      CREATED       STATUS          PORTS                NAMES
+83d49e0bb1af   cyberxsecurity/dvwa   "/main.sh"   3 weeks ago   Up 24 minutes   0.0.0.0:80->80/tcp   dvwa_web
+```
+
+#### Host: Elk
+```
+root@45f0b8ecdbe1:~# ansible elk -a "sudo docker ps"
+10.2.0.4 | CHANGED | rc=0 >>
+CONTAINER ID   IMAGE          COMMAND                  CREATED       STATUS          PORTS                                                                              NAMES
+db1abb994aec   sebp/elk:761   "/usr/local/bin/star…"   3 weeks ago   Up 25 minutes   0.0.0.0:5044->5044/tcp, 0.0.0.0:5601->5601/tcp, 0.0.0.0:9200->9200/tcp, 9300/tcp   elk_stack
+```
+
+### Target Machines & Beats
+This ELK server is configured to monitor the following machines:
+* 10.0.0.5
+* 10.0.0.6
+
+We have installed the following Beats on these machines:
+* FileBeat - Syslog monitoring
+* MetricBeat - System Resource monitoring
+
+Filebeat monitors the log files or locations that you specify, collects log events, and forwards them either to Elk for monitoring and even history.
+
+Metricbeat takes the metrics and statistics that it collects and ships them to Elk for further processing, this can be used for historical logs. 
+
+when used in conjunction with each other, this is a powerful monitoring tool for any Security operations center.
+
+
+### Using the Playbook
+
+
 ### Ansible Setup
 In this project, all configuration was performed using Ansible scripts in the ```Ansible``` folder above. This is also secured by using SSH keys for each of the host machines on the virtual network.
+
+use ``ssh-keygen`` to create a new SSH public key then ``cat .ssh/id_rsa.pub`` to get the key content. Modify the ``sshd`` file and disable password based authentication.
 
 Ansible is used to automate deployments of network infrastructure and applications, it has various applications and use cases.
 
@@ -103,9 +150,22 @@ Using the Ansible playbook, edit the Ansible host file and include your elk mach
 
 Provision the new docker container using the `project1-elk-server.yml` file and `ansible-playbook <filepath>`
 
-The following screenshot displays the end result of running `docker ps` after successfully configuring the ELK instance.
-
 ![Elk Docker PS Command](images/docker_ps_elk.png)
+
+Copy the content of the ``Ansible`` folder into a Linux machine with Ansible installed.
+
+**NOTE**: Edit the `hosts:` part of the file to target another machine or set of Ansible hosts.
+
+use the following to run the ansible playbook on the trageted machine located in the playbook file.
+```
+ansible-playbook ./project1-elk-server.yml
+```
+
+Then do the same for the two DVWA machines. This will install ``docker.io`` and download the DVWA application in a docker container.
+```
+ansible-playbook ./project1-webservers.yml
+```
+
 
 ### Monitoring with MetricBeats and FileBeat
 This ELK server is configured to monitor the following machines:
@@ -125,3 +185,6 @@ you can find an example of the end result for MetricBeat here.
 and FileBeat here.
 
 ![](images/FileBeat_Example_Final.png)
+
+to confirm Elk is running, navigate to ``https://<ip address>:5601``
+else use ``curl`` against the above address.
